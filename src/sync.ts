@@ -34,7 +34,13 @@ force_install_dir ${cacheDir}
 
   sh.ShellString('quit').toEnd(commandPath);
 
-  sh.exec(`${config.steamCMD} +runscript ${commandPath}`);
+  var exec = require('child_process').exec;
+  exec(`${config.steamCMD} +runscript ${commandPath}`, function(error:any, stdout:any, stderr:any) {
+    console.log(error);
+    console.log(stdout);
+    console.log(stderr);
+  });
+  //sh.exec(`${config.steamCMD} +runscript ${commandPath}`);
 };
 
 const sync = async () => {
